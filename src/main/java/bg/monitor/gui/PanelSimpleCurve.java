@@ -26,7 +26,9 @@ import javax.swing.WindowConstants;
  */
 public class PanelSimpleCurve extends JPanel {
 
-    private static final class Sample {
+    private static final long serialVersionUID = 1L;
+
+	private static final class Sample {
         final long epochMillis;
         final double y;
         Sample(long epochMillis, double y) { this.epochMillis = epochMillis; this.y = y; }
@@ -43,11 +45,14 @@ public class PanelSimpleCurve extends JPanel {
     private final int padRight = 15;
     private final int padTop = 15;
     private final int padBottom = 35;
+    
+    private String title="";
 
-    public PanelSimpleCurve(int windowSeconds, double yMin, double yMax) {
+    public PanelSimpleCurve(int windowSeconds, double yMin, double yMax,String title) {
         if (windowSeconds <= 1) throw new IllegalArgumentException("windowSeconds doit être > 1");
         if (yMax <= yMin) throw new IllegalArgumentException("yMax doit être > yMin");
         this.windowSeconds = windowSeconds;
+        this.title=title;
         this.yMin = yMin;
         this.yMax = yMax;
         setBackground(Color.WHITE);
@@ -102,6 +107,8 @@ public class PanelSimpleCurve extends JPanel {
                 int yy = plotY + (int) Math.round(i * (plotH / (double) gridLines));
                 g2.drawLine(plotX, yy, plotX + plotW, yy);
             }
+            g2.setColor(Color.red);
+            g2.drawString(title, 80, 40);
 
             // Labels Y
             g2.setColor(Color.DARK_GRAY);

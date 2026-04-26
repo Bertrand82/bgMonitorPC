@@ -2,7 +2,11 @@ package bg.monitor;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class TemperatureCurrent {
+	private static final Logger LOG = LogManager.getLogger(TemperatureCurrent.class);
 
 	public TemperatureCurrent() {
 		this.updateTemperature();
@@ -12,6 +16,11 @@ public class TemperatureCurrent {
 	
 	public void updateTemperature() {
 		this.listTemperature=UtilTemperature.getListTemperature();
+	}
+	
+	public Double getTemperatureThermal_zone0() {
+		Temperature temp=  getTemperatureByName("thermal_zone0");
+		return (temp==null)? 0d:temp.getValue();
 	}
 	
 	public Double getTemperatureNvidia() {
@@ -34,4 +43,8 @@ public class TemperatureCurrent {
 		}
 		return null;
 	}
+
+    public void logTemperature() {
+		LOG.info("TemperatureCurrent: {} C, {} C", this.getTemperatureThermal_zone0(), this.getTemperatureNvidia());
+    }
 }

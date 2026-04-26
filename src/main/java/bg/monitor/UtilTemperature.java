@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Stream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class UtilTemperature {
+	private static final Logger LOG = LogManager.getLogger(UtilTemperature.class);
 
 	public UtilTemperature() {
 	}
@@ -18,7 +20,7 @@ public final class UtilTemperature {
 	// Small demo
 	public static void main(String[] args) throws Exception {
 		List<Temperature> listTemperature1 = getListTemperature();
-		listTemperature1.forEach(e -> System.out.println("xx" + e));
+		listTemperature1.forEach(e -> LOG.info("{}", e));
 
 	}
 
@@ -67,8 +69,7 @@ public final class UtilTemperature {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.warn("Unable to read thermal zones", e);
 		}
 		return list;
 
@@ -88,8 +89,7 @@ public final class UtilTemperature {
 				return null;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.warn("Unable to read temperature file {}", file.getAbsolutePath(), e);
 			return null;
 		}
 	}
@@ -100,7 +100,7 @@ public final class UtilTemperature {
 		if (dir.exists()) {
 			for (File f : dir.listFiles()) {
 				if (f.getName().startsWith("thermal_zone")) {
-					System.out.println("--" + f.getName());
+					LOG.debug("Detected thermal zone {}", f.getName());
 					listDir.add(f);
 				}
 			}

@@ -24,7 +24,7 @@ import javax.swing.WindowConstants;
  * Axe X: fenêtre glissante de windowSeconds (en secondes, vers le passé).
  * Axe Y: fixe [yMin, yMax].
  */
-public class FixedScalePlotPanel extends JPanel {
+public class PanelSimpleCurve extends JPanel {
 
     private static final class Sample {
         final long epochMillis;
@@ -44,7 +44,7 @@ public class FixedScalePlotPanel extends JPanel {
     private final int padTop = 15;
     private final int padBottom = 35;
 
-    public FixedScalePlotPanel(int windowSeconds, double yMin, double yMax) {
+    public PanelSimpleCurve(int windowSeconds, double yMin, double yMax) {
         if (windowSeconds <= 1) throw new IllegalArgumentException("windowSeconds doit être > 1");
         if (yMax <= yMin) throw new IllegalArgumentException("yMax doit être > yMin");
         this.windowSeconds = windowSeconds;
@@ -178,30 +178,5 @@ public class FixedScalePlotPanel extends JPanel {
     }
 
     // ---- Démo ----
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FixedScalePlotPanel plot = new FixedScalePlotPanel(
-                    120,   // 2 minutes affichées
-                    -1.5,  // yMin fixe
-                    1.5    // yMax fixe
-            );
-
-            // Exemple de f(t): sin(t) (t en secondes)
-            DoubleUnaryOperator ff = (t) -> Math.sin(t / 5.0);
-
-            Timer timer = new Timer(1000, e -> {
-                double t = System.currentTimeMillis() / 1000.0;
-                plot.addSample(ff.applyAsDouble(t));
-            });
-            timer.start();
-
-            JFrame frame = new JFrame("Courbe Swing - échelle fixe");
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
-            frame.add(plot, BorderLayout.CENTER);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
+  
 }

@@ -14,7 +14,7 @@
             <Policies>
                 <SizeBasedTriggeringPolicy size="100KB"/>
             </Policies>
-            <DefaultRolloverStrategy max="20"/>
+            <DefaultRolloverStrategy max="3"/>
         </RollingFile>
     </Appenders>
 

@@ -3,6 +3,8 @@ package bg.monitor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.logging.log4j.message.Message;
+
 public class Temperature {
 
 	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
@@ -21,7 +23,9 @@ public class Temperature {
 	public String toString() {
 		return "date=" + sdf.format(date) + ", temperature=" + value + " Celsius , nom=" + name + "";
 	}
-
+	public String toString2() {
+		return  " temperature=" + value + " Celsius , nom=" + name + "";
+	}
 	public Double getValue() {
 		return value;
 	}
@@ -45,6 +49,8 @@ public class Temperature {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+
 	
 	
 

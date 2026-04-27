@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 public final class UtilTemperature {
 	private static final Logger LOG = LogManager.getLogger(UtilTemperature.class);
 
-	public UtilTemperature() {
+	private UtilTemperature() {
 	}
 
 	// Small demo

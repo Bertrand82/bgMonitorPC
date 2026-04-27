@@ -45,6 +45,8 @@ public class TemperatureCurrent {
 	}
 
     public void logTemperature() {
-		LOG.info("TemperatureCurrent: {} C, {} C", this.getTemperatureThermal_zone0(), this.getTemperatureNvidia());
+		for(Temperature temp: listTemperature) {
+			LOG.info(temp.toString2());
+		}
     }
 }

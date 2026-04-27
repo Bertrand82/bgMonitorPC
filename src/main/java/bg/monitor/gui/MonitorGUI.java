@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+import bg.monitor.MemoryCurrent;
 import bg.monitor.Temperature;
 import bg.monitor.TemperatureCurrent;
 
@@ -29,6 +30,12 @@ public class MonitorGUI {
 			"Thermal_zone0"
 	);
 
+	PanelSimpleCurve plot_Memory = new PanelSimpleCurve(120, // 2 minutes affichées
+			0.0, // yMin fixe
+			1.0 ,// yMax fixe
+			"Memory free"
+	);
+
 
 	DoubleUnaryOperator ff = (t) ->20.0* Math.sin(t / 5.0);
 
@@ -39,6 +46,7 @@ public class MonitorGUI {
         JPanel panelCentre = new JPanel(new GridLayout(0, 1));
         panelCentre.add(plotNvidia);
         panelCentre.add(plotThermal_zone0);
+        panelCentre.add(plot_Memory);
 
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
@@ -55,13 +63,19 @@ public class MonitorGUI {
 	}
 
 	TemperatureCurrent temperatureCurrent = new TemperatureCurrent();
+	MemoryCurrent memoryCurrent = new MemoryCurrent();
 	private void timerMonitor() {
 		//double t = System.currentTimeMillis() / 1000.0;
 		//plot.addSample(ff.applyAsDouble(t));
 		temperatureCurrent.updateTemperature();
+		memoryCurrent.updateMemory();
 		
 		plotNvidia.addSample(temperatureCurrent.getTemperatureNvidia());
 		plotThermal_zone0.addSample(temperatureCurrent.getTemperatureThermal_zone0());
+		plot_Memory.addSample(memoryCurrent.getMemoryFreePerCent());
 		temperatureCurrent.logTemperature();
+		memoryCurrent.logMemory();
+		System.out.println("getMemoryFreePerCent "+memoryCurrent.getMemoryFreePerCent());
+		
 	}
 }

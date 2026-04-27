@@ -14,8 +14,8 @@ public class Memory {
 	public double memoryFree_percent;
 	public Date date;
 	
-	public long processMemoryFree_Mb() {
-		return  (long) (memoryRamFree / (1024L * 1024L)); // MB
+	public double processMemoryFree_Mb() {
+		return  ((double) memoryRamFree) / memoryRamTotal; // MB
 	}
 	
 	public double getMemoryFree_perCent() {

@@ -75,7 +75,6 @@ public class MonitorGUI {
 		plot_Memory.addSample(memoryCurrent.getMemoryFreePerCent());
 		temperatureCurrent.logTemperature();
 		memoryCurrent.logMemory();
-		System.out.println("getMemoryFreePerCent "+memoryCurrent.getMemoryFreePerCent());
 		
 	}
 }

@@ -7,32 +7,24 @@ public class Memory {
 	public Memory(long mTotal, long mFree) {
 		memoryRamTotal = mTotal;
 		memoryRamFree = mFree;
+		this.memoryFree_percent=processMemoryFree_Mb();
 	}
 	public long memoryRamFree;
 	public long memoryRamTotal;
+	public double memoryFree_percent;
 	public Date date;
 	
-	public long getMemoryFree_Mb() {
+	public long processMemoryFree_Mb() {
 		return  (long) (memoryRamFree / (1024L * 1024L)); // MB
 	}
 	
 	public double getMemoryFree_perCent() {
-		if (memoryRamTotal==0d) {
-			return -1d;
-		}
-		if (memoryRamTotal==-1d) {
-			return -2d;
-		}
-		if (memoryRamFree==-1d) {
-			return -3d;
-		}
-		double r  =((double) memoryRamFree)/memoryRamTotal;
-		return r;
+		return memoryFree_percent;
 	}
 
 	@Override
 	public String toString() {
-		return "Memory [memoryRamFree=" + memoryRamFree + ", memoryRamTotal=" + memoryRamTotal + "]";
+		return "memoryRamFree=" + memoryRamFree + ", memoryRamTotal=" + memoryRamTotal + " pourCent_free="+memoryFree_percent;
 	}
 	
 }

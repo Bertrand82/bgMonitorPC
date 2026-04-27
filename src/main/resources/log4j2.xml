@@ -3,7 +3,7 @@
     <Properties>
         <Property name="LOG_DIR">logs</Property>
         <Property name="LOG_FILE">bgmonitor.log</Property>
-        <Property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %c{1} - %msg%n</Property>
+        <Property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n</Property>
     </Properties>
 
     <Appenders>
